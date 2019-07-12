@@ -91,3 +91,12 @@ gulp.task('processJS', () => {
       .pipe(uglify())
       .pipe(gulp.dest('dist'));
   });
+
+  // getting Gulp to run all of these tasks automatically!
+
+  const runSequence = require("run-sequence");
+  
+  gulp.task('default', (callback) => {
+    runSequence(['processHTML', 'processJS', 'babelPolyfill'], callback);
+  });
+  
