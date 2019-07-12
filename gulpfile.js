@@ -13,6 +13,12 @@ gulp.task("processJS",()=>{
         .pipe(gulp.dest("dist"));
 });
 
+gulp.task("processIMG",()=>{
+  gulp.src("images")
+      .pipe(gulp.dest("dist"));
+});
+
+
 // using JShint for linting my code
 const jshint = require("gulp-jshint");
 
