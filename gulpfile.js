@@ -60,3 +60,34 @@ gulp.task("babelPolyfill", () => {
     gulp.src('node_modules/babel-polyfill/browser.js')
         .pipe(gulp.dest('dist/node_modules/babel-polyfill'));
 });
+
+// using gulp-uglify to minifying my code
+
+const uglify = require("gulp-uglify");
+
+
+gulp.task('processJS', () => {
+    gulp.src('blog.js')
+      .pipe(jshint({
+        esversion: 6
+      }))
+      .pipe(jshint.reporter('default'))
+      .pipe(babel({
+        presets: ['env']
+      }))
+      .pipe(uglify())
+      .pipe(gulp.dest('dist'));
+  });
+
+  gulp.task('processJS', () => {
+    gulp.src('functions.js')
+      .pipe(jshint({
+        esversion: 6
+      }))
+      .pipe(jshint.reporter('default'))
+      .pipe(babel({
+        presets: ['env']
+      }))
+      .pipe(uglify())
+      .pipe(gulp.dest('dist'));
+  });
