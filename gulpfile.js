@@ -110,3 +110,25 @@ gulp.task('processJS', () => {
   gulp.task('default', (callback) => {
     runSequence(['processHTML', 'processJS', 'babelPolyfill'], 'watch', callback);
   });
+
+
+  // using Gulp to automatically run and refresh our browser window every time we modify my code
+
+  const browserSync = require("browser-sync").create();
+  gulp.task('browserSync', () => {
+    browserSync.init({
+      server: './dist',
+      port: 8080,
+      ui: {
+        port: 8081
+      }
+    });
+  });
+
+    gulp.task('watch', ['browserSync'], () => {
+        gulp.watch('*.js', ['processJS']);
+        gulp.watch('*.html', ['processHTML']);
+    
+        gulp.watch('dist/*.js', browserSync.reload);
+        gulp.watch('dist/*.html', browserSync.reload);
+  });
