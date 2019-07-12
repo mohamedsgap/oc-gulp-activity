@@ -99,4 +99,14 @@ gulp.task('processJS', () => {
   gulp.task('default', (callback) => {
     runSequence(['processHTML', 'processJS', 'babelPolyfill'], callback);
   });
-  
+
+  // watching my  files
+
+  gulp.task("watch", ()=>{
+    gulp.watch("*.js",["processJS"]);
+    gulp.watch("*.html",["processHTML"]);
+  });
+
+  gulp.task('default', (callback) => {
+    runSequence(['processHTML', 'processJS', 'babelPolyfill'], 'watch', callback);
+  });
